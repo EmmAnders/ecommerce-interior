@@ -1,0 +1,25 @@
+{
+  "name": "ecommerce-interior",
+  "version": "1.0.0",
+  "description": "ecommerce-interior",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmmAnders/ecommerce-interior.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EmmAnders/ecommerce-interior/issues"
+  },
+  "homepage": "https://github.com/EmmAnders/ecommerce-interior#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "mongoose": "^5.13.2"
+  }
+}
