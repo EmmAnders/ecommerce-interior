@@ -7,6 +7,11 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   orders: [{ type: Schema.Types.ObjectId, ref: "Order" }],
+  role: {
+    // Role of user it will be (normal or admin )
+    type: Number,
+    default: 0,
+  },
 });
 
 const User = mongoose.model("User", userSchema);
