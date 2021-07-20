@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
   created: { type: Date, default: Date.now },
-  total: { type: String, required: true },
+  total: { type: Number, required: true },
   items: [
     {
       item: { type: Schema.Types.ObjectId, ref: "Product" },
@@ -11,12 +11,8 @@ const orderSchema = new Schema({
       price: { type: Number, default: 0 },
     },
   ],
-
-  shipping: {
-    firstname: { type: String, required: true },
-    lastname: { type: String, required: true },
-    address: { type: String, required: true },
-  },
+  name: { type: String, required: true },
+  address: { type: String, required: true },
 });
 
 const Order = mongoose.model("Order", orderSchema);

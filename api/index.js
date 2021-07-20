@@ -1,26 +1,27 @@
+//Imports
 const express = require("express");
-const session = require("express-session");
 const mongoose = require("mongoose");
+const session = require("express-session");
+const formidableMiddleware = require("express-formidable");
+const path = require("path");
+const config = require("./config/Database");
+
+//Init app
 const app = express();
 
-require("dotenv").config({
-  path: ".config/index.env",
-});
-
+//Routes
 const productRoutes = require("./routes/ProductRoutes");
 const userRoutes = require("./routes/UserRoutes");
 const orderRoutes = require("./routes/OrderRoutes");
+const pageRoutes = require("./routes/PageRoutes");
 
-//Variables
-const port = 3001;
-
-//Connect to MongoDb
-const uri =
+/* const uri =
   "mongodb+srv://em:Bt1O1Pj0PZ6BvQkn@cluster0.tbuxy.mongodb.net/interior?retryWrites=true&w=majority";
+ */
 
 // Mongo DB Atlas Setup
 mongoose
-  .connect(uri, {
+  .connect(config.database, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
@@ -29,10 +30,10 @@ mongoose
   .catch((err) => console.log(err));
 
 // MIDDLEWARE
-//---------------
-//-------------------------
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+//Session Middleware
 app.use(
   session({
     secret: "ecom",
@@ -42,14 +43,20 @@ app.use(
   })
 );
 
-//ACL SETUP
+//Set Public folder
+app.use(express.static(path.join(__dirname, "public")));
 
 //ROUTES
 app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/orders", orderRoutes);
+app.use("/api/v1/pages", pageRoutes);
 
-//PORT CONNECTION
+//Formidable Middleware
+app.use(formidableMiddleware());
+
+//Start the server
+const port = 3000;
 app.listen(port, (err) => {
   if (err) return console.log(err);
   console.log(`Listening on port ${port}`);
