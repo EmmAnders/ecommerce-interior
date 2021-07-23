@@ -1,5 +1,5 @@
 <template>
-  <div class="home"></div>
+  <div>HOME</div>
 </template>
 
 <script>
@@ -7,10 +7,12 @@
 /* import HelloWorld from '@/components/HelloWorld.vue' */
 
 export default {
-  name: "Home",
   components: {},
 };
 </script>
 
 <style scoped>
+div {
+  margin-left: 20vw;
+}
 </style>
