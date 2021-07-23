@@ -23,6 +23,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   props: {
@@ -32,6 +33,14 @@ export default {
   },
   computed: {
     ...mapState(["categories"]),
+  },
+
+  methods: {
+    ...mapActions(["loadCategories"]),
+  },
+
+  created() {
+    this.loadCategories();
   },
 };
 </script>

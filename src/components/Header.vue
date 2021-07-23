@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import SidebarMenu from "./SidebarMenu";
 import Logo from "./Logo";
 
@@ -19,6 +20,14 @@ export default {
   components: {
     SidebarMenu,
     Logo,
+  },
+
+  methods: {
+    ...mapActions(["loadCategories"]),
+  },
+
+  created() {
+    this.loadCategories();
   },
 };
 </script>

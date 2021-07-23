@@ -1,20 +1,26 @@
 <template>
-  <div id="app">
-    <div class="routerview">
-      <router-view />
+  <div class="site-container">
+    <Header />
+    <div class="main">
+      <router-view class="pages" />
     </div>
   </div>
 </template>
 
 <script>
-/* import Home from "./views/Home"; */
+import Header from "./components/Header";
 
 export default {
-  components: {},
+  components: {
+    Header,
+  },
 };
 </script>
 
-<style>
+<style lang="scss">
+@import "@/scss/Variables.scss";
+@import "@/scss/Mixins.scss";
+
 html,
 body,
 div,
@@ -108,7 +114,7 @@ video {
 body {
   line-height: 1;
   background-color: #262626;
-  font-family: neue-haas-grotesk-display, sans-serif;
+  font-family: $font-primary;
 }
 
 ol,
@@ -119,6 +125,20 @@ a {
   text-decoration: none;
 }
 
-#app {
+.site-container {
+  padding: 1rem;
+}
+
+.main {
+  display: flex;
+}
+
+.pages {
+  width: 100%;
+  margin-left: 10vw;
+
+  @include desktop {
+    margin-left: 20vw;
+  }
 }
 </style>
