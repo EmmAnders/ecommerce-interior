@@ -12,8 +12,8 @@ const productSchema = new Schema({
   length: { type: String },
   height: { type: String },
   width: { type: String },
-  categories: [{ type: Schema.Types.ObjectId, ref: "Category" }],
-  images:[{ type: String }], 
+  category: { type: Schema.Types.ObjectId, ref: "Category" },
+  images: { type: String },
 });
 
 const Product = mongoose.model("Product", productSchema);
