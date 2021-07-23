@@ -1,62 +1,31 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Info from "../views/Info.vue";
+/* import Pages from "../views/Pages.vue"; */
+import ProductList from "../components/ProductList.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
+    path: "*",
+    redirect: "/",
+  },
+
+  {
     path: "/",
-    name: "Home",
     component: Home,
   },
 
   {
-    path: "/login",
-    name: "Login",
-    /*   component: Login, */
-  },
-
-  {
-    path: "/register",
-    name: "Register",
-    /*   component: Login, */
-  },
-
-  {
-    path: "/checkout",
-    name: "Checkout",
-    /*   component: Checkout, */
-  },
-
-  {
-    path: "/furniture",
-    name: "Furniture",
-    /*   component: Checkout, */
-  },
-
-  {
-    path: "/ceramics",
-    name: "Ceramics",
-    /*   component: Checkout, */
-  },
-
-  {
-    path: "/lightning",
-    name: "Lightning",
-    /*   component: Checkout, */
-  },
-
-  {
-    path: "/all",
-    name: "Shop all",
-    /*   component: Checkout, */
+    path: "/products/:category",
+    component: ProductList,
   },
 
   {
     path: "/info",
-    name: "Info",
-    /*   component: Checkout, */
+    component: Info,
   },
 ];
 
