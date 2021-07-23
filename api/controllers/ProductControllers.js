@@ -36,32 +36,6 @@ const getAllCategories = async (req, res) => {
   }
 };
 
-const getCategoryById = async (req, res) => {
-  const { categoryId } = req.params;
-
-  if (!mongoose.Types.ObjectId.isValid(categoryId)) {
-    return res.status(403).json({
-      error: "Category not founded",
-    });
-  }
-
-  try {
-    let category = await Category.findById(categoryId);
-
-    if (!category) {
-      return res.status(403).json({
-        error: "Category not founded",
-      });
-    }
-
-    req.category = category;
-    res.json(category);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send("Server error");
-  }
-};
-
 const addProduct = async (req, res) => {
   try {
     const newProduct = await Product.create({
@@ -75,7 +49,7 @@ const addProduct = async (req, res) => {
       width: req.body.width,
       length: req.body.length,
       height: req.body.height,
-      categories: req.body.categories,
+      category: req.body.category,
       images: req.body.images,
     });
     res.json(newProduct);
@@ -87,7 +61,20 @@ const addProduct = async (req, res) => {
 
 const getAllProducts = async (req, res) => {
   try {
-    let products = await Product.find({});
+    let products = await Product.find({}).populate("category");
+    res.json(products);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Server error");
+  }
+};
+
+const getProductsByCategory = async (req, res) => {
+  try {
+    let products = await Product.find({
+      categories: req.params.categoryId,
+    }).populate("categories");
+
     res.json(products);
   } catch (error) {
     console.log(error);
@@ -115,8 +102,8 @@ module.exports = {
   addProduct,
   getAllProducts,
   getAllCategories,
-  getCategoryById,
   getProductById,
   deleteProductById,
   addCategory,
+  getProductsByCategory,
 };
