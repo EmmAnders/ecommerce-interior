@@ -8,12 +8,12 @@
           }}</router-link>
         </li>
 
-        <li>
+        <li @click="toggleSidebar">
           <router-link to="/products/all">SHOP ALL</router-link>
         </li>
       </div>
       <div>
-        <li>
+        <li @click="toggleSidebar">
           <router-link to="/info">INFO</router-link>
         </li>
       </div>
