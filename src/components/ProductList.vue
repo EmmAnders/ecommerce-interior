@@ -1,28 +1,39 @@
 <template>
-  <div class="container">
-    <!--     <CategoryList /> -->
-    <div class="products" v-for="(product, i) in products" :key="i">
-      <div
-        v-if="
-          product.category.name === $route.params.category ||
-          $route.params.category === 'all'
+  <div class="product-container">
+    <div class="product" v-for="(product, i) in products" :key="i">
+      <router-link
+        v-bind:to="
+          '/products/' +
+            product.category.name +
+            '/' +
+            product.name.replace(/\s+/g, '-').toLowerCase() +
+            '/' +
+            product._id
         "
       >
-        <div>{{ product.name }} {{ product.brand }}</div>
-        <p><img :src="productImages + product.images" /></p>
-      </div>
+        <Card
+          v-if="
+            product.category.name === $route.params.category ||
+              $route.params.category === 'all'
+          "
+          :product_img="productImages + product.images"
+          :product_name="product.name"
+          :product_price="product.price"
+        />
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
+import Card from "./Card";
 
 /* import CategoryList from "../components/CategoryList"; */
 
 export default {
   components: {
-    /* CategoryList  */
+    Card,
   },
   computed: {
     ...mapState(["products", "productImages"]),
@@ -39,14 +50,25 @@ export default {
 };
 </script>
 
-<style scoped>
-img {
-  width: 100%;
-  height: 100%;
-}
+<style lang="scss" scoped>
+@import "@/scss/Variables.scss";
+@import "@/scss/Mixins.scss";
 
-p {
-  width: 200px;
-  height: 200px;
+.product-container {
+  margin-top: 15vh;
+  padding: 2vw;
+
+  @include tablet {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 1.5vw;
+  }
+  @include desktop {
+  }
+
+  .product {
+    height: 100%;
+    width: 100%;
+  }
 }
 </style>

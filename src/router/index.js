@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Info from "../views/Info.vue";
+import Product from "../views/Product.vue";
 /* import Pages from "../views/Pages.vue"; */
 import ProductList from "../components/ProductList.vue";
 
@@ -21,6 +22,11 @@ const routes = [
   {
     path: "/products/:category",
     component: ProductList,
+  },
+
+  {
+    path: "/products/:category/:name/:id",
+    component: Product,
   },
 
   {

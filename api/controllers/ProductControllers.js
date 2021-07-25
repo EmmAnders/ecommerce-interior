@@ -83,11 +83,16 @@ const getProductsByCategory = async (req, res) => {
 };
 
 const getProductById = async (req, res) => {
-  /*   try {
- 
-  } catch (err) {
-    res.status(400).json({ error: "Something went wrong.." });
-  } */
+  try {
+    let product = await Product.findById({
+      _id: req.params.id,
+    }).exec();
+
+    res.json(product);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Server error");
+  }
 };
 
 const deleteProductById = async (req, res) => {

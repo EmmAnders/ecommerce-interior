@@ -1,10 +1,11 @@
 <template>
   <header>
-    <div class="flex">
+    <div class="header-bar">
       <Logo />
       <div class="flex">
-        <p>LOGIN</p>
-        <p>CART</p>
+        <p class="sign-in">LOGIN</p>
+        <CartIcon />
+        <span class="cart-quantity">1</span>
       </div>
     </div>
     <SidebarMenu />
@@ -15,11 +16,13 @@
 import { mapActions } from "vuex";
 import SidebarMenu from "./SidebarMenu";
 import Logo from "./Logo";
+import CartIcon from "./CartIcon";
 
 export default {
   components: {
     SidebarMenu,
     Logo,
+    CartIcon,
   },
 
   methods: {
@@ -34,11 +37,33 @@ export default {
 
 <style lang="scss" scoped>
 header {
-  .flex {
+  z-index: 200;
+  .header-bar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     height: 5vh;
-    z-index: 101;
+    padding: 1rem;
+
+    .flex {
+      display: flex;
+      align-items: center;
+
+      .sign-in {
+        margin-right: 1.5rem;
+      }
+
+      .cart-quantity {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 50%;
+        background: #d9bdad;
+        margin-left: 0.5rem;
+      }
+    }
   }
 }
 </style>

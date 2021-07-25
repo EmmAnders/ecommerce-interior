@@ -10,7 +10,7 @@
 
 .logo {
   font-family: $font-secondary;
-  z-index: 101;
+  z-index: 103;
 
   a {
     color: $black;

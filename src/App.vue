@@ -1,9 +1,7 @@
 <template>
   <div class="site-container">
     <Header />
-    <div class="main">
-      <router-view class="pages" />
-    </div>
+    <router-view class="page" />
   </div>
 </template>
 
@@ -108,7 +106,7 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
-  color: #fafafa;
+  color: $white;
 }
 
 body {
@@ -126,19 +124,16 @@ a {
 }
 
 .site-container {
-  padding: 1rem;
+
 }
 
-.main {
-  display: flex;
-}
-
-.pages {
+.page {
   width: 100%;
-  margin-left: 10vw;
+  margin-left: 12vw;
 
   @include desktop {
     margin-left: 20vw;
+    width: 75vw;
   }
 }
 </style>
