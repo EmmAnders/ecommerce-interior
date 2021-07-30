@@ -1,21 +1,10 @@
 <template>
-  <div
-    @click="toggleSidebar"
-    v-bind:class="{ activeSidebar: activeSidebar }"
-    class="overlay"
-  ></div>
+  <div class="overlay"></div>
 </template>
 
 <script>
 export default {
-  props: {
-    toggleSidebar: {
-      type: Function,
-    },
-    activeSidebar: {
-      type: String,
-    },
-  },
+  props: {},
 };
 </script>
 
@@ -28,14 +17,15 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 101;
+  z-index: 102;
 
   @include desktop {
     display: none;
   }
 }
 
-.overlay.activeSidebar {
+.overlay.activeSidebar,
+.overlay.showCart {
   display: none;
 }
 </style>

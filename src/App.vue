@@ -1,16 +1,20 @@
 <template>
-  <div class="site-container">
+  <div>
     <Header />
-    <router-view class="page" />
+    <!--     <SidebarMenu /> -->
+    <main class="page-container">
+      <router-view />
+    </main>
   </div>
 </template>
 
 <script>
+/* import SidebarMenu from "./components/SidebarMenu"; */
 import Header from "./components/Header";
-
 export default {
   components: {
     Header,
+    /*     SidebarMenu, */
   },
 };
 </script>
@@ -121,19 +125,5 @@ li,
 a {
   list-style: none;
   text-decoration: none;
-}
-
-.site-container {
-
-}
-
-.page {
-  width: 100%;
-  margin-left: 12vw;
-
-  @include desktop {
-    margin-left: 20vw;
-    width: 75vw;
-  }
 }
 </style>

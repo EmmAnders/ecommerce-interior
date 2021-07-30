@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar-container">
-    <Overlay :toggleSidebar="toggleSidebar" :activeSidebar="activeSidebar" />
+    <!--     <Overlay /> -->
     <div v-bind:class="{ activeSidebar: activeSidebar }" class="sidebar">
       <button
         class="menu-btn"
@@ -16,10 +16,10 @@
 
 <script>
 import NavLinks from "./NavLinks";
-import Overlay from "./Overlay";
+/* import Overlay from "./Overlay"; */
 
 export default {
-  components: { NavLinks, Overlay },
+  components: { NavLinks /* Overlay  */ },
   data() {
     return { windowWidth: window.innerWidth, activeSidebar: false };
   },
@@ -42,7 +42,7 @@ export default {
 @import "@/scss/Variables.scss";
 @import "@/scss/Mixins.scss";
 
-.sidebar {
+.sidebar-container {
   background: $white;
   font-size: $paragraph-mobile-tablet;
   width: 60vw;
@@ -63,7 +63,7 @@ export default {
 
   @include desktop {
     font-size: $paragraph-desktop;
-    width: 20vw;
+    width: 10vw;
   }
 
   .menu-btn {

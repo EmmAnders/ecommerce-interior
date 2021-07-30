@@ -22,8 +22,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   props: {
@@ -32,15 +31,15 @@ export default {
     },
   },
   computed: {
-    ...mapState(["categories"]),
+    ...mapGetters("product", ["categories"]),
   },
 
   methods: {
-    ...mapActions(["loadCategories"]),
+    ...mapActions("product", ["getCategories"]),
   },
 
-  created() {
-    this.loadCategories();
+  mounted() {
+    this.getCategories();
   },
 };
 </script>

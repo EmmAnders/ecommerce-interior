@@ -1,27 +1,44 @@
+/*
 <template>
-  <div class="product-details">{{ product.data.name }}</div>
+  <div class="product-details">
+    {{ product.name }}
+
+    <img :src="productImages + product.images" alt="" />
+    <AddToCart :product="product" />
+  </div>
 </template>
 
 <script>
-import Axios from "axios";
+import { mapGetters, mapActions } from "vuex";
+import AddToCart from "../components/cart/AddToCart";
 
 export default {
-  data() {
-    return {
-      id: this.$route.params.id,
-      product: {},
-    };
+  components: {
+    AddToCart,
+  },
+  computed: {
+    ...mapGetters("product", ["productImages", "product"]),
   },
 
-  created() {
-    Axios.get("http://localhost:3000/api/v1/products/single/" + this.id).then(
-      (response) => (this.product = response)
-    );
+  methods: {
+    ...mapActions("product", ["getSingleProduct"]),
+  },
+
+  mounted() {
+    this.getSingleProduct(this.$route.params.id);
   },
 };
 </script>
 
 <style scoped lang="scss">
-div {
+@import "@/scss/Variables.scss";
+@import "@/scss/Mixins.scss";
+
+.product-details {
+  width: 500px;
+  img {
+    height: 250px;
+    width: 100%;
+  }
 }
 </style>
