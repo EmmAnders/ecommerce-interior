@@ -23,5 +23,8 @@ export function itemCount(state) {
 }
 
 export function totalPrice(state) {
-  return state.cart.reduce((total, cartItem) => total + cartItem.qty, 0);
+  return state.cart.reduce(
+    (total, cartItem) => total + cartItem.qty * cartItem.product.price,
+    0
+  );
 }

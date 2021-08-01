@@ -22,3 +22,18 @@ export function setCart(state, { product, qty }) {
     state.cart.push({ product: product, qty: qty });
   }
 }
+
+export function incrementQuantity(state, { product }) {
+  let cartItem = state.cart.find((item) => item.product._id == product._id);
+  cartItem.qty++;
+}
+
+export function decrementQuantity(state, { product }) {
+  let cartItem = state.cart.find((item) => item.product._id == product._id);
+  cartItem.qty--;
+}
+
+export function removeItem(state, { product }) {
+  let cartItem = state.cart.find((item) => item.product._id == product._id);
+  state.cart.splice(cartItem);
+}

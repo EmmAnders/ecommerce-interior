@@ -1,4 +1,4 @@
-<template>
+/* <template>
   <div>
     <Header />
     <!--     <SidebarMenu /> -->
@@ -127,3 +127,4 @@ a {
   text-decoration: none;
 }
 </style>
+ */
