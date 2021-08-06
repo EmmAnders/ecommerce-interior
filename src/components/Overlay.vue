@@ -10,7 +10,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/scss/Mixins.scss";
-.overlay {
+/* .overlay {
   background-color: #262626af;
   position: fixed;
   top: 0;
@@ -27,5 +27,5 @@ export default {
 .overlay.activeSidebar,
 .overlay.showCart {
   display: none;
-}
+} */
 </style>

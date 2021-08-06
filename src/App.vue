@@ -1,7 +1,7 @@
-/* <template>
-  <div>
+/*
+<template>
+  <div class="site-container">
     <Header />
-    <!--     <SidebarMenu /> -->
     <main class="page-container">
       <router-view />
     </main>
@@ -9,12 +9,19 @@
 </template>
 
 <script>
-/* import SidebarMenu from "./components/SidebarMenu"; */
+import { mapActions } from "vuex";
+
 import Header from "./components/Header";
 export default {
   components: {
     Header,
-    /*     SidebarMenu, */
+  },
+
+  methods: {
+    ...mapActions({ initializeCart: "cart/initializeCart" }),
+  },
+  created() {
+    this.initializeCart(this.$store);
   },
 };
 </script>
@@ -126,5 +133,14 @@ a {
   list-style: none;
   text-decoration: none;
 }
+
+body {
+  overflow-x: hidden;
+}
+
+.site-container {
+  margin: 0 auto;
+  padding: 2%;
+}
 </style>
- */
+*/

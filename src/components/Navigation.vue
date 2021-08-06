@@ -1,20 +1,21 @@
 <template>
   <nav>
     <ul>
+      <div @click="toggleMenu" class="close-menu">X</div>
       <div class="product-links">
-        <li @click="toggleSidebar" v-for="(category, i) in categories" :key="i">
+        <li @click="toggleMenu" v-for="(category, i) in categories" :key="i">
           <router-link :to="'/products/' + category.slug">{{
             category.name.toUpperCase()
           }}</router-link>
         </li>
 
-        <li @click="toggleSidebar">
-          <router-link to="/products/all">SHOP ALL</router-link>
+        <li @click="toggleMenu">
+          <router-link to="/products/all">Shop alL</router-link>
         </li>
       </div>
       <div>
-        <li @click="toggleSidebar">
-          <router-link to="/info">INFO</router-link>
+        <li @click="toggleMenu">
+          <router-link to="/info">Info</router-link>
         </li>
       </div>
     </ul>
@@ -26,7 +27,7 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   props: {
-    toggleSidebar: {
+    toggleMenu: {
       type: Function,
     },
   },
@@ -49,26 +50,41 @@ export default {
 @import "@/scss/Mixins.scss";
 
 nav {
-  height: 100%;
+  background: $white;
+  color: $black;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 103;
+  display: hidden;
+  text-transform: uppercase;
+  width: 50vw;
+  padding: 2%;
+
+  @include desktop {
+    width: 20vw;
+  }
+
   ul {
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 100%;
 
-    a {
-      color: $black;
+    li:not(:last-child) {
+      margin-bottom: 1rem;
     }
 
-    .product-links {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 100%;
+    .close-menu,
+    a {
+      color: $black;
+      font-size: 1.3rem;
+    }
 
-      li:not(:last-child) {
-        margin-bottom: 0.8rem;
-      }
+    .close-menu {
+      display: flex;
+      justify-content: flex-end;
     }
   }
 }

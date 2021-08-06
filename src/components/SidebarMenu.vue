@@ -1,7 +1,10 @@
 <template>
-  <div class="sidebar-container">
-    <!--     <Overlay /> -->
-    <div v-bind:class="{ activeSidebar: activeSidebar }" class="sidebar">
+  <div
+    v-bind:class="{ activeSidebar: activeSidebar }"
+    class="sidebar-container"
+  >
+    <Overlay />
+    <div class="sidebar">
       <button
         class="menu-btn"
         v-show="windowWidth < 1000"
@@ -16,10 +19,10 @@
 
 <script>
 import NavLinks from "./NavLinks";
-/* import Overlay from "./Overlay"; */
+import Overlay from "./Overlay";
 
 export default {
-  components: { NavLinks /* Overlay  */ },
+  components: { NavLinks, Overlay },
   data() {
     return { windowWidth: window.innerWidth, activeSidebar: false };
   },
@@ -45,25 +48,16 @@ export default {
 .sidebar-container {
   background: $white;
   font-size: $paragraph-mobile-tablet;
-  width: 60vw;
   position: fixed;
   left: 0;
   top: 0;
   bottom: 0;
   padding: 1rem 0rem 1rem 1rem;
-  transition: 0.5s;
   z-index: 102;
-
-  button {
-    background: none;
-    border: none;
-    padding: 0;
-    outline: inherit;
-  }
+  width: 20vw;
 
   @include desktop {
     font-size: $paragraph-desktop;
-    width: 10vw;
   }
 
   .menu-btn {
@@ -76,12 +70,11 @@ export default {
   }
 }
 
-.sidebar.activeSidebar {
-  left: -50vw;
-  transition: 0.5s;
+.sidebar-container.activeSidebar {
+  left: 0;
 
-  @include desktop {
+  /*   @include desktop {
     left: 0;
-  }
+  } */
 }
 </style>

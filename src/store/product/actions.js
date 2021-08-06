@@ -39,6 +39,9 @@ export const getCategories = async ({ commit }) => {
     });
 };
 
+
+
+
 //Get product by id
 /* export const productDetails = async ({ commit }) => {
   let id = req.params.id;
@@ -52,7 +55,7 @@ export const getCategories = async ({ commit }) => {
     });
 }; */
 
-export function removeCartItem({ commit, getters }, id) {
+/* export function removeCartItem({ commit, getters }, id) {
   let cart = [];
   if (id) {
     for (let index = 0; index < getters.cart.length; index++) {
@@ -64,3 +67,4 @@ export function removeCartItem({ commit, getters }, id) {
   }
   commit("setCart", cart);
 }
+ */

@@ -35,9 +35,8 @@ export default {
 @import "@/scss/Mixins.scss";
 
 .product-details {
-  width: 500px;
   img {
-    height: 250px;
+    height: 100%;
     width: 100%;
   }
 }

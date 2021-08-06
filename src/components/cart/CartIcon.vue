@@ -1,6 +1,7 @@
 <template>
   <div>
     <div @click="toggleCart" class="cart">
+      <div v-show="showCart" class="overlay"></div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="30"
@@ -44,16 +45,29 @@ export default {
   methods: {
     toggleCart() {
       this.showCart = !this.showCart;
-      console.log(this.showCart);
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "@/scss/Variables.scss";
+@import "@/scss/Mixins.scss";
+
 .cart {
   display: flex;
   align-items: center;
+
+  .overlay {
+    position: fixed;
+    z-index: 103;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #262626db;
+    transition: opacity 0.3s ease;
+  }
   .cart-quantity {
     display: inline-block;
     width: 30px;
@@ -61,9 +75,9 @@ export default {
     line-height: 30px;
     text-align: center;
     border-radius: 50%;
-    background: #e1ff32;
+    background-color: $white;
     margin-left: 0.5rem;
-    color: #262626;
+    color: $black;
   }
 }
 </style>

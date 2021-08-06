@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <div class="product" v-for="(product, i) in products" :key="i">
-      <ProductCard 
+      <ProductCard
         v-if="
           product.category.name === $route.params.category ||
-            $route.params.category === 'all'
+          $route.params.category === 'all'
         "
         :product="product"
         :image="productImages"
@@ -41,15 +41,17 @@ export default {
 @import "@/scss/Mixins.scss";
 
 .container {
-  margin-top: 15vh;
-  padding: 2vw;
+  margin-top: 10vh;
+  display: grid;
+  grid-gap: 1.5vw;
+  grid-template-columns: 1fr 1fr;
 
   @include tablet {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-gap: 1.5vw;
+    grid-template-columns: 1fr 1fr 1fr;
   }
+
   @include desktop {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 
   .product {

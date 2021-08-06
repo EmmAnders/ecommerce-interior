@@ -1,6 +1,6 @@
 <template>
   <div class="logo">
-    <router-link to="/">LO<br />GO</router-link>
+    <router-link to="/">LOGO</router-link>
   </div>
 </template>
 
@@ -10,10 +10,9 @@
 
 .logo {
   font-family: $font-secondary;
-  z-index: 103;
 
   a {
-    color: $black;
+    color: $white;
   }
 
   @include desktop {

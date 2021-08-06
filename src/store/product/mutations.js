@@ -20,6 +20,9 @@ export function setCart(state, { product, qty }) {
     cartItem.qty += qty;
   } else {
     state.cart.push({ product: product, qty: qty });
+
+    /*  window.localStorage.setItem("cart", JSON.stringify(state.cart)); */
+    /*  state.cart = JSON.parse(window.localStorage.getItem('cart')) */
   }
 }
 
@@ -30,10 +33,18 @@ export function incrementQuantity(state, { product }) {
 
 export function decrementQuantity(state, { product }) {
   let cartItem = state.cart.find((item) => item.product._id == product._id);
-  cartItem.qty--;
+
+  if (cartItem.qty <= 1) {
+    state.cart = state.cart.filter((item) => {
+      return item.product._id !== cartItem.product._id;
+    });
+  } else {
+    cartItem.qty--;
+  }
 }
 
-export function removeItem(state, { product }) {
-  let cartItem = state.cart.find((item) => item.product._id == product._id);
-  state.cart.splice(cartItem);
+export function removeItem(state, id) {
+  state.cart = state.cart.filter((item) => {
+    return item.product._id !== id;
+  });
 }

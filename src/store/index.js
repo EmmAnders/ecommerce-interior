@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
 
 import product from "./product";
 /* import account from "./account" */
@@ -12,6 +13,7 @@ export default function() {
       /*       account, */
       product,
     },
+    plugins: [createPersistedState()],
     strict: process.env.DEV,
   });
   return Store;
