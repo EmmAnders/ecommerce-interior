@@ -2,10 +2,19 @@ export default function() {
   const productImagesUrl = `http://localhost:3000/media/products/`;
 
   return {
-    categories: [],
     products: [],
+    filteredProducts: [],
     product: {},
-    productImages: productImagesUrl,
     cart: [],
+    filter: {
+      search: "",
+      color: [],
+      brand: [],
+      category: [],
+    },
+    categories: [],
+    productImages: productImagesUrl,
+    brands: [],
+    colors: [],
   };
 }

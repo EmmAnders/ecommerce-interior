@@ -4,6 +4,8 @@ const baseUrl = "http://localhost:3000/api/v1";
 const productsUrl = `${baseUrl}/products`; // Endpoint for all products
 const productUrl = `${baseUrl}/products/single/`; //Endpoint for single product
 const categoryUrl = `${baseUrl}/products/categories`;
+const brandsUrl = `${baseUrl}/products/brands`;
+const colorsUrl = `${baseUrl}/products/colors`;
 
 // Get all products
 export const getProducts = async ({ commit }) => {
@@ -39,7 +41,31 @@ export const getCategories = async ({ commit }) => {
     });
 };
 
+export const getBrands = async ({ commit }) => {
+  axios
+    .get(brandsUrl)
+    .then((response) => {
+      commit("setBrands", response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
+export const getColors = async ({ commit }) => {
+  axios
+    .get(colorsUrl)
+    .then((response) => {
+      commit("setColors", response.data);
+    })
+    .catch((error) => {
+      console.log(errort)
+    });
+};
+
+export const filterColor = async ({commit}, color) => {
+  await commit('setColor', color);
+};
 
 
 //Get product by id

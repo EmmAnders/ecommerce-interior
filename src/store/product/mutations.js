@@ -2,6 +2,14 @@ export function setCategories(state, value) {
   state.categories = value;
 }
 
+export function setBrands(state, value) {
+  state.brands = value;
+}
+
+export function setColors(state, value) {
+  state.colors = value;
+}
+
 export function setProducts(state, value) {
   state.products = value;
 }

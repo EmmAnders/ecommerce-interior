@@ -36,6 +36,33 @@ const getAllCategories = async (req, res) => {
   }
 };
 
+const getAllBrands = async (req, res) => {
+  try {
+    let brands = await Product.find({})
+      .select("brand")
+      .distinct("brand")
+      .exec();
+    res.json(brands);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Server error");
+  }
+};
+
+const getAllProductColors = async (req, res) => {
+  try {
+    let colors = await Product.find({})
+      .select("color")
+      .distinct("color")
+      .exec();
+
+    res.json(colors);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("server error");
+  }
+};
+
 const addProduct = async (req, res) => {
   try {
     const newProduct = await Product.create({
@@ -87,8 +114,8 @@ const getProductById = async (req, res) => {
     let product = await Product.findById({
       _id: req.params.id,
     }).exec();
-
     res.json(product);
+    
   } catch (error) {
     console.log(error);
     res.status(500).send("Server error");
@@ -111,4 +138,6 @@ module.exports = {
   deleteProductById,
   addCategory,
   getProductsByCategory,
+  getAllBrands,
+  getAllProductColors,
 };

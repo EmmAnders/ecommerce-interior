@@ -9,19 +9,10 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-
 import Header from "./components/Header";
 export default {
   components: {
     Header,
-  },
-
-  methods: {
-    ...mapActions({ initializeCart: "cart/initializeCart" }),
-  },
-  created() {
-    this.initializeCart(this.$store);
   },
 };
 </script>

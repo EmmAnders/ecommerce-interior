@@ -2,6 +2,14 @@ export function categories(state) {
   return state.categories;
 }
 
+export function brands(state) {
+  return state.brands;
+}
+
+export function colors(state) {
+  return state.colors;
+}
+
 export function products(state) {
   return state.products;
 }

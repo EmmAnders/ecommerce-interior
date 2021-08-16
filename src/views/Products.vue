@@ -1,14 +1,18 @@
 <template>
-  <div class="container">
-    <div class="product" v-for="(product, i) in products" :key="i">
-      <ProductCard
-        v-if="
-          product.category.name === $route.params.category ||
-          $route.params.category === 'all'
-        "
-        :product="product"
-        :image="productImages"
-      />
+  <div>
+    <ProductFilter />
+
+    <div class="products-container">
+      <div class="product" v-for="(product, i) in products" :key="i">
+        <ProductCard
+          v-if="
+            product.category.name === $route.params.category ||
+              $route.params.category === 'all'
+          "
+          :product="product"
+          :image="productImages"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -18,10 +22,14 @@ import { mapGetters, mapActions } from "vuex";
 
 import ProductCard from "../components/ProductCard";
 
+import ProductFilter from "../components/ProductFilter";
+
 export default {
   components: {
     ProductCard,
+    ProductFilter,
   },
+
   computed: {
     ...mapGetters("product", ["products", "productImages"]),
   },
@@ -30,7 +38,7 @@ export default {
     ...mapActions("product", ["getProducts"]),
   },
 
-  mounted() {
+  created() {
     this.getProducts();
   },
 };
@@ -40,8 +48,7 @@ export default {
 @import "@/scss/Variables.scss";
 @import "@/scss/Mixins.scss";
 
-.container {
-  margin-top: 10vh;
+.products-container {
   display: grid;
   grid-gap: 1.5vw;
   grid-template-columns: 1fr 1fr;
