@@ -3,15 +3,13 @@ export default function() {
 
   return {
     products: [],
-    filteredProducts: [],
     product: {},
-    cart: [],
     filter: {
       search: "",
       color: [],
       brand: [],
-      category: [],
     },
+    cart: [],
     categories: [],
     productImages: productImagesUrl,
     brands: [],

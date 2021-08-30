@@ -18,8 +18,9 @@ export function setProduct(state, value) {
   state.product = value;
 }
 
-export function setLoad(state, value) {
-  state.uploadingData = value;
+export function setFilter(state) {
+  state.filter.color = [];
+  state.filter.brand = [];
 }
 
 export function setCart(state, { product, qty }) {
@@ -28,9 +29,6 @@ export function setCart(state, { product, qty }) {
     cartItem.qty += qty;
   } else {
     state.cart.push({ product: product, qty: qty });
-
-    /*  window.localStorage.setItem("cart", JSON.stringify(state.cart)); */
-    /*  state.cart = JSON.parse(window.localStorage.getItem('cart')) */
   }
 }
 

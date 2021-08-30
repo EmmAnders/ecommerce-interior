@@ -1,9 +1,11 @@
-.<template>
+<template>
   <form class="filter">
     <div @click="toggleFilter" class="filter-button">
       <p>Filter</p>
       <p>+</p>
     </div>
+
+    <div v-if="showFilter" @click="resetFilter">RESET</div>
 
     <div v-if="showFilter" class="filter-options">
       <div @click="brandOptions = !brandOptions" class="option-title">
@@ -17,8 +19,7 @@
             :value="brand"
             type="checkbox"
             name="brand"
-            v-model="filtersApplied"
-            v-on:change="getfilteredData"
+            v-model="filter.brand"
           />
           <label for="brand">
             {{ brand }}
@@ -37,42 +38,20 @@
             :value="color"
             type="checkbox"
             name="color"
-            v-model="filtersApplied"
+            v-model="filter.color"
           />
           <label for="color">
             {{ color }}
           </label>
         </div>
       </div>
-
-      <div @click="categoryOptions = !categoryOptions" class="option-title">
-        <p>Category</p>
-        <p>+</p>
-      </div>
-
-      <div v-if="categoryOptions" class="options-container">
-        <div v-for="(category, i) in categories" :key="i" class="option">
-          <input
-            :value="category.name"
-            type="checkbox"
-            name="category"
-            v-model="filtersApplied"
-          />
-          <label for="category">
-            {{ category.name }}
-          </label>
-        </div>
-      </div>
-    </div>
-    <div v-for="(filter, i) in filtersApplied" :key="i">
-      <li>{{ filter.toUpperCase() }}</li>
     </div>
   </form>
 </template>
 
 <script>
 /* import plusIcon from "../assets/icons/plus.svg"; */
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "ProductFilter",
@@ -86,20 +65,33 @@ export default {
       colorOptions: false,
       brandOptions: false,
       categoryOptions: false,
-      filtersApplied: [],
     };
   },
 
   computed: {
-    ...mapGetters("product", ["categories", "brands", "colors"]),
+    ...mapGetters("product", ["categories", "brands", "colors", "filter"]),
   },
 
   methods: {
+    ...mapActions("product", ["getBrands", "getColors"]),
+    ...mapMutations("product", ["setFilter"]),
+
     toggleFilter() {
       this.showFilter = !this.showFilter;
-      console.log(this.brands);
+      this.colorOptions = false;
+      this.brandOptions = false;
     },
-    ...mapActions("product", ["getBrands", "getColors"]),
+
+    resetFilter() {
+      this.setFilter();
+    },
+  },
+
+  watch: {
+    $route() {
+      this.resetFilter();
+      this.showFilter = !this.showFilter;
+    },
   },
 
   created() {

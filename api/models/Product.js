@@ -13,6 +13,7 @@ const productSchema = new Schema({
   height: { type: String },
   width: { type: String },
   category: { type: Schema.Types.ObjectId, ref: "Category" },
+  subCategory: { type: Schema.Types.ObjectId, ref: "subCategory" },
   images: { type: String },
 });
 

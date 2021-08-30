@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Product = require("../models/Product");
 const Category = require("../models/Category");
+const SubCategory = require("../models/SubCategory");
 
 const addCategory = async (req, res) => {
   const { name, slug } = req.body;
@@ -26,10 +27,51 @@ const addCategory = async (req, res) => {
   }
 };
 
+const addSubCategory = async (req, res) => {
+  const { name, categoryId } = req.body;
+
+  try {
+    let subCategory = await SubCategory.findOne({
+      name,
+    });
+
+    if (subCategory) {
+      return res.status(403).json({
+        error: "subCategory already exist",
+      });
+    } else {
+      subCategory = await SubCategory.create({
+        name,
+        categoryId,
+      });
+
+      Category.findByIdAndUpdate(
+        req.body.categoryId,
+        { $push: { subCategories: req.body._id } }
+      );
+
+      res.json(subCategory);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Server error...");
+  }
+};
+
 const getAllCategories = async (req, res) => {
   try {
-    let categories = await Category.find({});
+    let categories = await Category.find({}).populate();
     res.json(categories);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Server error");
+  }
+};
+
+const getAllSubCategories = async (req, res) => {
+  try {
+    let subCategories = await SubCategory.find({}).populate("categoryId");
+    res.json(subCategories);
   } catch (error) {
     console.log(error);
     res.status(500).send("Server error");
@@ -115,7 +157,6 @@ const getProductById = async (req, res) => {
       _id: req.params.id,
     }).exec();
     res.json(product);
-    
   } catch (error) {
     console.log(error);
     res.status(500).send("Server error");
@@ -134,9 +175,11 @@ module.exports = {
   addProduct,
   getAllProducts,
   getAllCategories,
+  getAllSubCategories,
   getProductById,
   deleteProductById,
   addCategory,
+  addSubCategory,
   getProductsByCategory,
   getAllBrands,
   getAllProductColors,

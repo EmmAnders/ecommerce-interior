@@ -131,7 +131,7 @@ body {
 
 .site-container {
   margin: 0 auto;
-  padding: 2%;
+  padding: 3% 6%;
 }
 </style>
 */

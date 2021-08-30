@@ -4,7 +4,7 @@
       <div @click="toggleMenu" class="close-menu">X</div>
       <div class="product-links">
         <li @click="toggleMenu" v-for="(category, i) in categories" :key="i">
-          <router-link :to="'/products/' + category.slug">{{
+          <router-link :to="'/products/' + category.name">{{
             category.name.toUpperCase()
           }}</router-link>
         </li>

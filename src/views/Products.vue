@@ -1,9 +1,12 @@
 <template>
   <div>
     <ProductFilter />
-
     <div class="products-container">
-      <div class="product" v-for="(product, i) in products" :key="i">
+      <div
+        class="product"
+        v-for="product in filteredProducts"
+        :key="product._id"
+      >
         <ProductCard
           v-if="
             product.category.name === $route.params.category ||
@@ -18,7 +21,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 import ProductCard from "../components/ProductCard";
 
@@ -31,11 +34,36 @@ export default {
   },
 
   computed: {
-    ...mapGetters("product", ["products", "productImages"]),
+    ...mapGetters("product", [
+      "products",
+      "productImages",
+      "filter" /* "filteredProducts" */,
+    ]),
+
+    filteredProducts: function() {
+      let filter = this.filter;
+      return this.products.filter((item) => {
+        for (let key in filter) {
+          let options = [];
+          for (let value of filter[key]) {
+            options.push(value);
+          }
+          if (
+            options.length !== 0 &&
+            !options.includes(item[key]) &&
+            item.category.name == this.$route.params.category
+          ) {
+            return false;
+          }
+        }
+        return true;
+      });
+    },
   },
 
   methods: {
     ...mapActions("product", ["getProducts"]),
+    ...mapMutations("product", ["setFilter"]),
   },
 
   created() {

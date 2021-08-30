@@ -14,6 +14,10 @@ export function products(state) {
   return state.products;
 }
 
+export function filter(state) {
+  return state.filter;
+}
+
 export function product(state) {
   return state.product;
 }

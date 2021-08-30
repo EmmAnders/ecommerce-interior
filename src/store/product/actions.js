@@ -59,14 +59,9 @@ export const getColors = async ({ commit }) => {
       commit("setColors", response.data);
     })
     .catch((error) => {
-      console.log(errort)
+      console.log(error);
     });
 };
-
-export const filterColor = async ({commit}, color) => {
-  await commit('setColor', color);
-};
-
 
 //Get product by id
 /* export const productDetails = async ({ commit }) => {
