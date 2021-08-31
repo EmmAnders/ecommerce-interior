@@ -20,7 +20,7 @@
         </div>
 
         <div class="column three">
-          <p @click="handleRemoveItem(item.product._id)">remove</p>
+          <p @click="handleRemoveCartItem(item.product._id)">remove</p>
           <p>{{ item.qty }} x {{ item.product.price }}</p>
         </div>
       </div>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "CartItem",
   computed: {
@@ -43,11 +43,10 @@ export default {
   },
 
   methods: {
-    ...mapMutations("product", [
-      "setCart",
+    ...mapActions("product", [
       "incrementQuantity",
       "decrementQuantity",
-      "removeItem",
+      "removeCartItem",
     ]),
 
     handleAddQuantity(product) {
@@ -58,8 +57,8 @@ export default {
       this.decrementQuantity(product);
     },
 
-    handleRemoveItem(id) {
-      this.removeItem(id);
+    handleRemoveCartItem(id) {
+      this.removeCartItem(id);
     },
   },
 };

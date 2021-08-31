@@ -40,3 +40,7 @@ export function totalPrice(state) {
     0
   );
 }
+
+export function filterItemCount(state) {
+  return state.filter.color + state.filter.brand.length;
+}

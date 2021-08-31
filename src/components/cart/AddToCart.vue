@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="counter">
-      <span @click="decrement()">&mdash;</span>
+      <span @click="handleDecrement()">&mdash;</span>
       <input
         class="quantity"
         type="text"
@@ -9,7 +9,7 @@
         v-model="cart_quantity"
         readonly
       />
-      <span @click="increment()">&#xff0b;</span>
+      <span @click="handleIncrement()">&#xff0b;</span>
     </div>
 
     <button @click="handleAddProduct(product, cart_quantity)">
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { /* mapActions */ mapMutations, mapGetters } from "vuex";
+import { mapActions, /* mapMutations,  */ mapGetters } from "vuex";
 export default {
   props: ["product"],
 
@@ -34,17 +34,17 @@ export default {
   },
 
   methods: {
-    ...mapMutations("product", ["setCart"]),
+    ...mapActions("product", ["addToCart"]),
 
     handleAddProduct(product, qty) {
-      this.setCart({ product, qty });
+      this.addToCart({ product, qty });
     },
 
-    increment() {
+    handleIncrement() {
       this.cart_quantity++;
     },
 
-    decrement() {
+    handleDecrement() {
       if (this.cart_quantity >= 1) {
         this.cart_quantity--;
       } else {

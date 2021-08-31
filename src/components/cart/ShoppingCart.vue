@@ -9,7 +9,6 @@
         <h2>CART ({{ itemCount }})</h2>
         <span @click="toggleCart">x</span>
       </div>
-
       <CartItem />
     </div>
 
@@ -24,7 +23,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations /* , mapActions  */ } from "vuex";
+import { mapGetters } from "vuex";
 import CartItem from "./CartItem";
 
 export default {
@@ -44,26 +43,7 @@ export default {
     ]),
   },
 
-  methods: {
-    ...mapMutations("product", [
-      "setCart",
-      "incrementQuantity",
-      "decrementQuantity",
-      "removeItem",
-    ]),
-
-    handleAddQuantity(product) {
-      this.incrementQuantity(product);
-    },
-
-    handleRemoveQuantity(product) {
-      this.decrementQuantity(product);
-    },
-
-    handleRemoveItem(id) {
-      this.removeItem(id);
-    },
-  },
+  methods: {},
 };
 </script>
 

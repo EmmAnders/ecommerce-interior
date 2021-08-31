@@ -1,29 +1,34 @@
-export function setCategories(state, value) {
-  state.categories = value;
-}
-
-export function setBrands(state, value) {
-  state.brands = value;
-}
-
-export function setColors(state, value) {
-  state.colors = value;
-}
-
-export function setProducts(state, value) {
+export function SET_PRODUCTS(state, value) {
   state.products = value;
 }
 
-export function setProduct(state, value) {
+export function SET_PRODUCT(state, value) {
   state.product = value;
 }
 
-export function setFilter(state) {
+export function SET_CATEGORIES(state, value) {
+  state.categories = value;
+}
+
+export function SET_BRANDS(state, value) {
+  state.brands = value;
+}
+
+export function SET_COLORS(state, value) {
+  state.colors = value;
+}
+
+export function SET_FILTER(state) {
   state.filter.color = [];
   state.filter.brand = [];
 }
 
-export function setCart(state, { product, qty }) {
+export function SET_FILTER_ITEM(state, index) {
+  state.filter.color.splice(index, 1);
+  state.filter.brand.splice(index, 1);
+}
+
+export function SET_CART(state, { product, qty }) {
   const cartItem = state.cart.find((item) => item.product._id == product._id);
   if (cartItem != null) {
     cartItem.qty += qty;
@@ -32,12 +37,18 @@ export function setCart(state, { product, qty }) {
   }
 }
 
-export function incrementQuantity(state, { product }) {
+export function SET_REMOVE_CART_ITEM(state, id) {
+  state.cart = state.cart.filter((item) => {
+    return item.product._id !== id;
+  });
+}
+
+export function SET_INCREMENTQTY(state, { product }) {
   let cartItem = state.cart.find((item) => item.product._id == product._id);
   cartItem.qty++;
 }
 
-export function decrementQuantity(state, { product }) {
+export function SET_DECREMENTQTY(state, { product }) {
   let cartItem = state.cart.find((item) => item.product._id == product._id);
 
   if (cartItem.qty <= 1) {
@@ -47,10 +58,4 @@ export function decrementQuantity(state, { product }) {
   } else {
     cartItem.qty--;
   }
-}
-
-export function removeItem(state, id) {
-  state.cart = state.cart.filter((item) => {
-    return item.product._id !== id;
-  });
 }

@@ -1,11 +1,17 @@
 <template>
   <form class="filter">
-    <div @click="toggleFilter" class="filter-button">
-      <p>Filter</p>
-      <p>+</p>
-    </div>
+    <div @click="toggleFilter" class="filter-btn-wrapper">
+      <div class="filter-btn">
+        <p>
+          Filter
+          <span v-if="filterItemCount > 0">({{ filterItemCount }})</span>
+        </p>
+      </div>
 
-    <div v-if="showFilter" @click="resetFilter">RESET</div>
+      <div v-if="filterItemCount > 0" @click="handleResetFilter">
+        RESET
+      </div>
+    </div>
 
     <div v-if="showFilter" class="filter-options">
       <div @click="brandOptions = !brandOptions" class="option-title">
@@ -46,12 +52,33 @@
         </div>
       </div>
     </div>
+    <div class="filter-selected">
+      <div
+        @click="handleRemoveFiltItem(selected)"
+        class="selected"
+        v-for="(selected, i) in filter.color"
+        :key="i"
+      >
+        <p>{{ selected }}</p>
+        <p>x</p>
+      </div>
+
+      <div
+        @click="handleRemoveFilterItem(selected)"
+        class="selected"
+        v-for="(selected, i) in filter.brand"
+        :key="i"
+      >
+        <p>{{ selected }}</p>
+        <p>x</p>
+      </div>
+    </div>
   </form>
 </template>
 
 <script>
 /* import plusIcon from "../assets/icons/plus.svg"; */
-import { mapGetters, mapActions, mapMutations } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "ProductFilter",
@@ -69,12 +96,22 @@ export default {
   },
 
   computed: {
-    ...mapGetters("product", ["categories", "brands", "colors", "filter"]),
+    ...mapGetters("product", [
+      "categories",
+      "brands",
+      "colors",
+      "filter",
+      "filterItemCount",
+    ]),
   },
 
   methods: {
-    ...mapActions("product", ["getBrands", "getColors"]),
-    ...mapMutations("product", ["setFilter"]),
+    ...mapActions("product", [
+      "getBrands",
+      "getColors",
+      "resetFilter",
+      "removeFilterItem",
+    ]),
 
     toggleFilter() {
       this.showFilter = !this.showFilter;
@@ -82,8 +119,12 @@ export default {
       this.brandOptions = false;
     },
 
-    resetFilter() {
-      this.setFilter();
+    handleResetFilter() {
+      this.resetFilter();
+    },
+
+    handleRemoveFilterItem(index) {
+      this.removeFilterItem(index);
     },
   },
 
@@ -118,7 +159,7 @@ export default {
     font-size: 0.7rem;
   }
 
-  .filter-button {
+  .filter-btn-wrapper {
     display: flex;
     justify-content: space-between;
     padding: 0.8rem;
@@ -128,6 +169,38 @@ export default {
 
     p {
       color: $white;
+    }
+
+    .filter-btn {
+      display: flex;
+      p:first-child {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  .filter-selected {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+
+    .selected {
+      margin: 0.5rem 0.5rem 0.5rem 0rem;
+      color: $black;
+      background: $white;
+      display: flex;
+      justify-content: space-evenly;
+      padding: 0.5rem;
+      text-transform: uppercase;
+      align-items: center;
+      border-radius: 0.7rem;
+      font-size: 0.7rem;
+
+      p:first-child {
+        margin-right: 0.5rem;
+      }
     }
   }
 

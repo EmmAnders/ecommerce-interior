@@ -12,7 +12,7 @@ export const getProducts = async ({ commit }) => {
   axios
     .get(productsUrl)
     .then((response) => {
-      commit("setProducts", response.data);
+      commit("SET_PRODUCTS", response.data);
     })
     .catch((error) => {
       console.log(error);
@@ -23,7 +23,7 @@ export const getSingleProduct = async ({ commit }, id) => {
   axios
     .get(productUrl + id)
     .then((response) => {
-      commit("setProduct", response.data);
+      commit("SET_PRODUCT", response.data);
     })
     .catch((error) => {
       console.log(error);
@@ -34,7 +34,7 @@ export const getCategories = async ({ commit }) => {
   axios
     .get(categoryUrl)
     .then((response) => {
-      commit("setCategories", response.data);
+      commit("SET_CATEGORIES", response.data);
     })
     .catch((error) => {
       console.log(error);
@@ -45,7 +45,7 @@ export const getBrands = async ({ commit }) => {
   axios
     .get(brandsUrl)
     .then((response) => {
-      commit("setBrands", response.data);
+      commit("SET_BRANDS", response.data);
     })
     .catch((error) => {
       console.log(error);
@@ -56,36 +56,33 @@ export const getColors = async ({ commit }) => {
   axios
     .get(colorsUrl)
     .then((response) => {
-      commit("setColors", response.data);
+      commit("SET_COLORS", response.data);
     })
     .catch((error) => {
       console.log(error);
     });
 };
 
-//Get product by id
-/* export const productDetails = async ({ commit }) => {
-  let id = req.params.id;
-  axios
-    .get(productUrl)
-    .then((response) => {
-      commit("setProduct", response.data[0]);
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-}; */
+export const resetFilter = ({ commit }, payload) => {
+  commit("SET_FILTER", payload);
+};
 
-/* export function removeCartItem({ commit, getters }, id) {
-  let cart = [];
-  if (id) {
-    for (let index = 0; index < getters.cart.length; index++) {
-      const element = getters.cart[index];
-      if (element.id !== id) {
-        cart.push(element);
-      }
-    }
-  }
-  commit("setCart", cart);
-}
- */
+export const removeFilterItem = ({ commit }, payload) => {
+  commit("SET_FILTER_ITEM", payload);
+};
+
+export const addToCart = ({ commit }, payload) => {
+  commit("SET_CART", payload);
+};
+
+export const removeCartItem = ({ commit }, payload) => {
+  commit("SET_REMOVE_CART_ITEM", payload);
+};
+
+export const incrementQuantity = ({ commit }, payload) => {
+  commit("SET_INCREMENTQTY", payload);
+};
+
+export const decrementQuantity = ({ commit }, payload) => {
+  commit("SET_DECREMENTQTY", payload);
+};
