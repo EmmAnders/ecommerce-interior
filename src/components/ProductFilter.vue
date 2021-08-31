@@ -54,10 +54,10 @@
     </div>
     <div class="filter-selected">
       <div
-        @click="handleRemoveFiltItem(selected)"
+        @click="handleRemoveFilterItem(selected)"
         class="selected"
-        v-for="(selected, i) in filter.color"
-        :key="i"
+        v-for="selected in filter.color"
+        :key="selected"
       >
         <p>{{ selected }}</p>
         <p>x</p>
@@ -66,8 +66,8 @@
       <div
         @click="handleRemoveFilterItem(selected)"
         class="selected"
-        v-for="(selected, i) in filter.brand"
-        :key="i"
+        v-for="selected in filter.brand"
+        :key="selected"
       >
         <p>{{ selected }}</p>
         <p>x</p>
@@ -123,8 +123,9 @@ export default {
       this.resetFilter();
     },
 
-    handleRemoveFilterItem(index) {
-      this.removeFilterItem(index);
+    handleRemoveFilterItem(selected) {
+      this.removeFilterItem(selected);
+      console.log("selected", selected);
     },
   },
 

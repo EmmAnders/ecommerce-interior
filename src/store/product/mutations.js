@@ -23,9 +23,14 @@ export function SET_FILTER(state) {
   state.filter.brand = [];
 }
 
-export function SET_FILTER_ITEM(state, index) {
-  state.filter.color.splice(index, 1);
-  state.filter.brand.splice(index, 1);
+export function SET_FILTER_ITEM(state, selected) {
+  state.filter.color = state.filter.color.filter((c) => {
+    return c !== selected;
+  });
+
+  state.filter.brand = state.filter.brand.filter((b) => {
+    return b !== selected;
+  });
 }
 
 export function SET_CART(state, { product, qty }) {

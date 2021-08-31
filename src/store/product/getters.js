@@ -42,5 +42,5 @@ export function totalPrice(state) {
 }
 
 export function filterItemCount(state) {
-  return state.filter.color + state.filter.brand.length;
+  return state.filter.color.length + state.filter.brand.length;
 }
